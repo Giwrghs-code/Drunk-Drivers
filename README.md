@@ -19,13 +19,19 @@
 ### Prerequisites
 
 - A C++17 (or later) compatible compiler
-- SFML installed ([Installation Guide](https://www.sfml-dev.org/tutorials/2.5/))
+-You must set up SFML before running the code in code/main.cpp.
+If SFML is not installed/configured, the game will not compile or run.
+-Link SFML to Your Project:g++ code/main.cpp -o DrunkDrivers -lsfml-graphics -lsfml-window -lsfml-system
 
 ### Build Instructions
-Το παιχνίδι λειτουργεί με βοήθεια της sfml.
-Όλες οι βιβλιοθήκες που χρησιμοποιήθηκαν είναι μέσα στον φάκελο του προγράμματος.
-Αν τρέξετε το πρόγραμμα μέσω του Dev C++  πιθανώς να μην προκύψει κανένα πρόβλημα,
-Εάν όμως χρησιμοποιήσετε κάποιο άλλο πρόγραμμα ( όπως στην περίπτωση μας Visual Studio), θα χρειαστεί να εισαγάγετε στο configuration properties,μια στον C/C++ compiler και μια στο Linker, τα directory προς τις βιβλιοθήκες αυτές του sfml που εμπεριέχονται μέσα στον φάκελο.
-Μετά από αυτό μπορείτε να κάνετε compile and run και τρέχει το παιχνίδι 
+Το παιχνίδι λειτουργεί με τη βοήθεια της βιβλιοθήκης SFML.
+Για να εκτελεστεί σωστά μέσω του Visual Studio, θα χρειαστεί να γίνουν οι κατάλληλες ρυθμίσεις στις Configuration Properties, τόσο στον C/C++ compiler όσο και στον Linker, ώστε να περιλαμβάνουν τα paths προς τους φακέλους της SFML.
+Τα απαιτούμενα assets βρίσκονται μέσα στον φάκελο assets και οργανώνονται στους υποφακέλους:
+audio για τους ήχους (π.χ. background και εφέ)
+images για τα γραφικά του παίκτη και των εμποδίων
+font για τη γραμματοσειρά του παιχνιδιού
+Κατά συνέπεια, θα πρέπει να τροποποιηθούν τα paths στον κώδικα, ώστε να αντιστοιχούν στα σωστά directories (π.χ. για τον παίκτη, τα εμπόδια, τους ήχους και το background), χρησιμοποιώντας τα κατάλληλα αρχεία από τους παραπάνω
+υποφακέλους.
+
 
 
