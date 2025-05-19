@@ -19,8 +19,10 @@
 ### Prerequisites
 
 - A C++17 (or later) compatible compiler
+
 -You must set up SFML before running the code in code/main.cpp.
 If SFML is not installed/configured, the game will not compile or run.
+
 -Link SFML to Your Project:g++ code/main.cpp -o DrunkDrivers -lsfml-graphics -lsfml-window -lsfml-system
 
 ### Build Instructions
