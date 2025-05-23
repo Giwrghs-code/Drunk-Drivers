@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <ctime>
 
+
 using namespace std;
 using namespace sf;
 
@@ -31,32 +32,35 @@ int main()
     Texture backgroundTexture, playerTexture, obstacleTexture;
     Font font;
 
-    if (!backgroundTexture.loadFromFile("C:\\Users\\georg\\Desktop\\game ess\\ChatGPTimag.png") ||
-        !playerTexture.loadFromFile("C:\\Users\\georg\\Desktop\\game ess\\blue.png") ||
-        !obstacleTexture.loadFromFile("C:\\Users\\georg\\Desktop\\game ess\\black.png") ||
-        !font.loadFromFile("C:\\Users\\georg\\Desktop\\game ess\\slkscre.ttf")) {
-        cerr << "Error: Could not load one or more resources." << endl;
+    if (!backgroundTexture.loadFromFile("ChatGPTimag.png") ||
+        !playerTexture.loadFromFile("337-3375354_clipart-pixel-car-purple-front-pixel-art-car-top-view.png") ||
+        !obstacleTexture.loadFromFile("337-3375354_clipart-pixel-car-purple-front-pixel-art-car-top-view1.png") ||  //elegxos an forto8hkan oi eikones
+        !font.loadFromFile("PixelEmulator-xq08.ttf"))
+    {
+        cout<< "Error: Could not load one or more resources." << endl;
         return -1;
     }
 
     SoundBuffer engineBuffer;
-    if (!engineBuffer.loadFromFile("C:\\Users\\georg\\Desktop\\game ess\\starting_engine(1.wav")) {
-        cerr << "Error: Could not load engine sound." << endl;
-        return -1;
+    if (!engineBuffer.loadFromFile("starting_engine(1.wav"))
+    {
+        cout<< "Error: Could not load engine sound." << endl;               //prwtos hxos enarkshs
+		return -1;
     }
     Sound engineSound;
     engineSound.setBuffer(engineBuffer);
-    engineSound.setLoop(false);
-    engineSound.setVolume(50.f);
-
+    engineSound.setLoop(false); 
+    engineSound.setVolume(50.f); 
+    
     SoundBuffer secondBuffer;
-    if (!secondBuffer.loadFromFile("C:\\Users\\georg\\Desktop\\game ess\\audiomass-output2.wav")) {
-        cerr << "Error: Could not load second sound." << endl;
-        return -1;
+    if (!secondBuffer.loadFromFile("audiomass-output2.wav"))
+    {
+        cout << "Error: Could not load second sound." << endl;          //deyteros hxos mhxanhs
+		return -1;
     }
     Sound secondSound;
     secondSound.setBuffer(secondBuffer);
-    secondSound.setLoop(true);
+    secondSound.setLoop(true); 
     secondSound.setVolume(50.f);
 
     while (window.isOpen())
@@ -66,7 +70,7 @@ int main()
         MenuResult menuResult = showMenu(window, font, backgroundTexture, windowSize);
         if (menuResult == MENU_EXIT || !window.isOpen())
             break;
-        if (menuResult == MENU_OPTIONS)
+        if (menuResult == MENU_OPTIONS)                                                                         //epiloges menou
         {
             if (!showOptions(window, font, backgroundTexture, windowSize))
                 break;
@@ -79,16 +83,16 @@ int main()
         if (mode == NONE)
             break;
 
-        secondSound.stop();
+       // secondSound.stop();
 
         engineSound.setLoop(false);
-        engineSound.play();
+        engineSound.play();                                 //proetoimasia hxwn
         secondSound.setLoop(true);
         secondSound.play();
 
         bool survived = runGame(window, font, backgroundTexture, playerTexture, obstacleTexture, mode, engineSound, secondSound);
 
-        if (!survived)
+        if (!survived) 
         {
             showEndScreen(window, font);
         }
@@ -104,7 +108,7 @@ MenuResult showMenu(RenderWindow& window, Font& font, Texture& backgroundTexture
         windowSize = window.getSize();
         Sprite background(backgroundTexture);
         Vector2u textureSize = backgroundTexture.getSize();
-        float scaleX = static_cast<float>(windowSize.x) / textureSize.x;                //fortwsh to background kai rythmish tis klimakas
+		float scaleX = static_cast<float>(windowSize.x) / textureSize.x;                //fortwsh to background kai rythmish tis klimakas
         float scaleY = static_cast<float>(windowSize.y) / textureSize.y;
         background.setScale(scaleX, scaleY);
 
@@ -116,22 +120,22 @@ MenuResult showMenu(RenderWindow& window, Font& font, Texture& backgroundTexture
 
         Text title("Drunk Drivers", font, titleFontSize);
         title.setFillColor(Color::Yellow);
-        title.setOrigin(title.getLocalBounds().width / 2.f, title.getLocalBounds().height / 2.f);           //dhmiourgia titlou
+		title.setOrigin(title.getLocalBounds().width / 2.f, title.getLocalBounds().height / 2.f);           //dhmiourgia titlou
         title.setPosition(centerX, startY);
 
         Text onePlayer("1 Player", font, buttonFontSize);
         onePlayer.setFillColor(Color::White);
-        onePlayer.setOrigin(onePlayer.getLocalBounds().width / 2.f, onePlayer.getLocalBounds().height / 2.f);       //dhmiourgia epiloghs prwtou paikti
+		onePlayer.setOrigin(onePlayer.getLocalBounds().width / 2.f, onePlayer.getLocalBounds().height / 2.f);       //dhmiourgia epiloghs prwtou paikti
         onePlayer.setPosition(centerX, startY + buttonSpacing);
 
         Text twoPlayer("2 Players", font, buttonFontSize);
         twoPlayer.setFillColor(Color::White);
-        twoPlayer.setOrigin(twoPlayer.getLocalBounds().width / 2.f, twoPlayer.getLocalBounds().height / 2.f);       //dhmiourgia epiloghs deuterou paikti
+		twoPlayer.setOrigin(twoPlayer.getLocalBounds().width / 2.f, twoPlayer.getLocalBounds().height / 2.f);       //dhmiourgia epiloghs deuterou paikti
         twoPlayer.setPosition(centerX, startY + buttonSpacing * 2);
 
         Text options("Options", font, buttonFontSize);
         options.setFillColor(Color::White);
-        options.setOrigin(options.getLocalBounds().width / 2.f, options.getLocalBounds().height / 2.f);     //dhmiourgia epiloghs options
+		options.setOrigin(options.getLocalBounds().width / 2.f, options.getLocalBounds().height / 2.f);     //dhmiourgia epiloghs options
         options.setPosition(centerX, startY + buttonSpacing * 3);
 
         bool menuActive = true;
@@ -156,7 +160,7 @@ MenuResult showMenu(RenderWindow& window, Font& font, Texture& backgroundTexture
                     float mouseY = static_cast<float>(Mouse::getPosition(window).y);
                     if (onePlayer.getGlobalBounds().contains(mouseX, mouseY))
                         return MENU_ONE;
-                    if (twoPlayer.getGlobalBounds().contains(mouseX, mouseY))                   //anagnwrish 8eshs mouse 
+					if (twoPlayer.getGlobalBounds().contains(mouseX, mouseY))                   //anagnwrish 8eshs mouse 
                         return MENU_TWO;
                     if (options.getGlobalBounds().contains(mouseX, mouseY))
                         return MENU_OPTIONS;
@@ -172,7 +176,7 @@ MenuResult showMenu(RenderWindow& window, Font& font, Texture& backgroundTexture
             window.clear();
             window.draw(background);
             window.draw(title);
-            window.draw(onePlayer);             //fortwsh background,titlou kai epilogwn
+			window.draw(onePlayer);             //fortwsh background,titlou kai epilogwn
             window.draw(twoPlayer);
             window.draw(options);
             window.display();
@@ -286,14 +290,14 @@ bool runGame(RenderWindow& window, Font& font, Texture& backgroundTexture, Textu
 
     Sprite background1(backgroundTexture);
     Sprite background2(backgroundTexture);
-    background1.setScale(scaleX, scaleY);               //sxediasmos background
+	background1.setScale(scaleX, scaleY);               //sxediasmos background
     background2.setScale(scaleX, scaleY);
     background1.setPosition(0.f, 0.f);
     background2.setPosition(0.f, -static_cast<float>(windowSize.y));
 
     Sprite player1(playerTexture);
-    player1.setScale(scaleX / 13, scaleY / 10);//<----------------------
-    FloatRect p1Bounds = player1.getGlobalBounds();                     //sxediasmos paikth 1
+    player1.setScale(scaleX/13,scaleY/10);//<----------------------
+	FloatRect p1Bounds = player1.getGlobalBounds();                     //sxediasmos paikth 1
     player1.setPosition(
         windowSize.x / 2.f - p1Bounds.width / 2.f,
         windowSize.y * 0.8f - p1Bounds.height / 2.f
@@ -301,7 +305,7 @@ bool runGame(RenderWindow& window, Font& font, Texture& backgroundTexture, Textu
 
     Sprite player2(playerTexture);
     player2.setScale(scaleX / 13, scaleY / 10);//<------------------------
-    FloatRect p2Bounds = player2.getGlobalBounds();                             //sxediasmos paikth 2
+	FloatRect p2Bounds = player2.getGlobalBounds();                             //sxediasmos paikth 2
     player2.setPosition(
         windowSize.x / 2.f - p2Bounds.width / 2.f,
         windowSize.y * 0.9f - p2Bounds.height / 2.f
@@ -320,7 +324,7 @@ bool runGame(RenderWindow& window, Font& font, Texture& backgroundTexture, Textu
     counterText.setPosition(10.f, 10.f);
 
     float backgroundSpeed = 100.f;
-    float backgroundSpeedMax = 500.f;               //times gia enallagh background
+	float backgroundSpeedMax = 500.f;               //times gia enallagh background
     float backgroundAcceleration = 200.f;
 
     while (window.isOpen())
@@ -329,7 +333,7 @@ bool runGame(RenderWindow& window, Font& font, Texture& backgroundTexture, Textu
         while (window.pollEvent(event))
         {
             if (event.type == Event::Closed) {
-                engineSound.stop();
+                engineSound.stop();                 
                 secondSound.stop();
                 window.close();
                 return false;
@@ -344,7 +348,7 @@ bool runGame(RenderWindow& window, Font& font, Texture& backgroundTexture, Textu
         background1.move(0.f, backgroundSpeed * deltaTime);
         background2.move(0.f, backgroundSpeed * deltaTime);
         if (background1.getPosition().y >= static_cast<float>(windowSize.y))
-            background1.setPosition(0.f, background2.getPosition().y - static_cast<float>(windowSize.y));       //eikonikh allagh background 
+			background1.setPosition(0.f, background2.getPosition().y - static_cast<float>(windowSize.y));       //eikonikh allagh background 
         if (background2.getPosition().y >= static_cast<float>(windowSize.y))
             background2.setPosition(0.f, background1.getPosition().y - static_cast<float>(windowSize.y));
 
@@ -354,7 +358,7 @@ bool runGame(RenderWindow& window, Font& font, Texture& backgroundTexture, Textu
         if (Keyboard::isKeyPressed(Keyboard::Left))
             player1.move(-300.f * deltaTime, 0.f);
         if (Keyboard::isKeyPressed(Keyboard::Right))
-            player1.move(300.f * deltaTime, 0.f);                   //elegxos kinisewn paikth 1
+			player1.move(300.f * deltaTime, 0.f);                   //elegxos kinisewn paikth 1
         if (Keyboard::isKeyPressed(Keyboard::Up))
             player1.move(0.f, -300.f * deltaTime);
         if (Keyboard::isKeyPressed(Keyboard::Down))
@@ -371,7 +375,7 @@ bool runGame(RenderWindow& window, Font& font, Texture& backgroundTexture, Textu
             if (Keyboard::isKeyPressed(Keyboard::A))
                 player2.move(-300.f * deltaTime, 0.f);
             if (Keyboard::isKeyPressed(Keyboard::D))
-                player2.move(300.f * deltaTime, 0.f);           //elegxos kinisewn paikth 2
+				player2.move(300.f * deltaTime, 0.f);           //elegxos kinisewn paikth 2
             if (Keyboard::isKeyPressed(Keyboard::W))
                 player2.move(0.f, -300.f * deltaTime);
             if (Keyboard::isKeyPressed(Keyboard::S))
@@ -379,25 +383,25 @@ bool runGame(RenderWindow& window, Font& font, Texture& backgroundTexture, Textu
 
             FloatRect p2Bounds = player2.getGlobalBounds();
             Vector2f p2Pos = player2.getPosition();
-            p2Pos.x = max(roadLeft, min(p2Pos.x, roadRight - p2Bounds.width));
+            p2Pos.x =max(roadLeft,min(p2Pos.x, roadRight - p2Bounds.width));
             p2Pos.y = max(roadTop, min(p2Pos.y, roadBottom - p2Bounds.height));
             player2.setPosition(p2Pos);
         }
 
         if (spawnClock.getElapsedTime().asSeconds() > spawnInterval)
         {
-            if (spawnInterval >= 0.3f) spawnInterval -= 0.01f;
+			if (spawnInterval>=0.3f) spawnInterval -= 0.01f;
             Sprite obstacle(obstacleTexture);
-            obstacle.setScale(scaleX / 13, scaleY / 10);//<----------------------
+			obstacle.setScale(scaleX / 13, scaleY / 10);//<----------------------
 
             float obstacleWidth = obstacle.getGlobalBounds().width;
             float minX = roadLeft;
             float maxX = roadRight - obstacleWidth;
 
-            float spawnX = minX + static_cast<float>(rand()) / RAND_MAX * (maxX - minX);            //ru8miseis gia kinhsh obstacle
+			float spawnX = minX + static_cast<float>(rand()) / RAND_MAX * (maxX - minX);            //ru8miseis gia kinhsh obstacle
 
             bool overlap = false;
-            float minGapY = 200.f;
+            float minGapY = 200.f; 
             for (const auto& obs : obstacles) {
                 float ox = obs.getPosition().x;
                 float oy = obs.getPosition().y;
@@ -421,44 +425,49 @@ bool runGame(RenderWindow& window, Font& font, Texture& backgroundTexture, Textu
             obstacle.move(0.f, obstacleSpeed * deltaTime);
             FloatRect oBounds = obstacle.getGlobalBounds();
             Vector2f oPos = obstacle.getPosition();
-            oPos.x = max(roadLeft, min(oPos.x, roadRight - oBounds.width));
+            oPos.x =max(roadLeft,min(oPos.x, roadRight - oBounds.width));
             obstacle.setPosition(oPos);
         }
 
         for (const auto& obstacle : obstacles)
         {
-            /* if (player1.getGlobalBounds().intersects(obstacle.getGlobalBounds()))
-             {
-                 engineSound.stop();
-                 secondSound.stop();
-                 return false;                                                                                   //elegxos gia syngkroush me to empodio
-             }
-             if (mode == TWO_PLAYER && player2.getGlobalBounds().intersects(obstacle.getGlobalBounds()))
-             {
-                 engineSound.stop();
-                 secondSound.stop();
-                 return false;
-             }*/
+           /* if (player1.getGlobalBounds().intersects(obstacle.getGlobalBounds()))
+            {
+                engineSound.stop();
+                secondSound.stop();
+                return false;                                                                                   //elegxos gia syngkroush me to empodio
+            }
+            if (mode == TWO_PLAYER && player2.getGlobalBounds().intersects(obstacle.getGlobalBounds()))
+            {
+                engineSound.stop();
+                secondSound.stop();
+                return false;
+            }*/
 
             FloatRect bounds = player1.getGlobalBounds();
-
+            FloatRect bounds2= player2.getGlobalBounds();
             float shrinkFactor = 0.2f;
+
             FloatRect customBounds(
                 bounds.left + bounds.width * shrinkFactor / 2.f,
-                bounds.top + bounds.height * shrinkFactor / 2.f,                    //deuteros tropos elegxou syngkroushs me mikrotero hitbox
+				bounds.top + bounds.height * shrinkFactor / 2.f,
                 bounds.width * (1.f - shrinkFactor),
-                bounds.height * (1.f - shrinkFactor)
-            );
+                bounds.height * (1.f - shrinkFactor));
+       
+            FloatRect customBounds2(
+                bounds2.left + bounds2.width * shrinkFactor / 2.f,
+                bounds2.top + bounds2.height * shrinkFactor / 2.f,                    //deuteros tropos elegxou syngkroushs me mikrotero hitbox
+                bounds2.width * (1.f - shrinkFactor),
+                bounds2.height * (1.f - shrinkFactor));
 
             FloatRect obstacleBounds = obstacle.getGlobalBounds();
             FloatRect customObstacleBounds(
                 obstacleBounds.left + obstacleBounds.width * shrinkFactor / 2.f,
                 obstacleBounds.top + obstacleBounds.height * shrinkFactor / 2.f,
                 obstacleBounds.width * (1.f - shrinkFactor),
-                obstacleBounds.height * (1.f - shrinkFactor)
-            );
+                obstacleBounds.height * (1.f - shrinkFactor));
 
-            if (customBounds.intersects(customObstacleBounds))
+            if (customBounds.intersects(customObstacleBounds)||customBounds2.intersects(customObstacleBounds)) 
             {
                 engineSound.stop();
                 secondSound.stop();
@@ -492,9 +501,9 @@ bool runGame(RenderWindow& window, Font& font, Texture& backgroundTexture, Textu
 
 void showEndScreen(RenderWindow& window, Font& font)
 {
-    sleep(seconds(0.3));
+	sleep(seconds(0.3));
     Text endText("Game Over", font, 60);
-    endText.setFillColor(Color::Red);                       //emfansh tou game over
+	endText.setFillColor(Color::Red);                       //emfansh tou game over
     FloatRect bounds = endText.getLocalBounds();
     endText.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
     endText.setPosition(window.getSize().x / 2.f, window.getSize().y / 2.f);
